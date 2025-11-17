@@ -32,85 +32,80 @@ export class StringName implements Name {
     }
 
     public asDataString(): string {
-        const components = this.name.split(this.delimiter);
-        const maskedComponents = components.map((comp) => {
-            let masked = "";
-            for (let ch of comp) {
-                if (ch === DEFAULT_DELIMITER) {
-                    masked += ESCAPE_CHARACTER + ch;
-                } else if (ch === ESCAPE_CHARACTER) {
-                    masked += ESCAPE_CHARACTER + ESCAPE_CHARACTER;
-                } else {
-                    masked += ch;
-                }
-            }
-            return masked;
-        });
-        return maskedComponents.join(this.delimiter);
+        if(this.name.includes(ESCAPE_CHARACTER)){
+            for(let i: number = 0; i<this.name.length; i++){
+
+            } 
+        }
+        throw new Error("needs implementation or deletion");
     }
 
     public getDelimiterCharacter(): string {
-        return this.delimiter;
+        throw new Error("needs implementation or deletion");
     }
 
     public isEmpty(): boolean {
-        return this.getNoComponents() === 0;
+        if(this.getNoComponents() == 0){
+            return true;
+        }
+        return false;
+        //throw new Error("needs implementation or deletion");
     }
 
     public getNoComponents(): number {
-        if (this.name === "") return 0;
-        return this.name.split(this.delimiter).length;
+        if(this.name == ""){
+            return 0;
+        }
+        return 1;
+        //throw new Error("needs implementation or deletion");
     }
 
-    public getComponent(i: number): string {
-        const components = this.name.split(this.delimiter);
-        if (i < 0 || i >= components.length) {
-            throw new Error("Komponente existiert nicht");
+    public getComponent(x: number): string {
+        if(this.isEmpty()){
+            throw new Error("String ist leer");
         }
-        return components[i];
+        return this.name[x];
     }
 
-    public setComponent(i: number, c: string): void {
-        const components = this.name.split(this.delimiter);
-        if (i < 0 || i >= components.length) {
-            throw new Error("Komponente existiert nicht");
+    public setComponent(n: number, c: string): void {
+        if(this.isEmpty()){
+            throw new Error("String ist leer");
         }
-        components[i] = c;
-        this.name = components.join(this.delimiter);
+        else if(n>=this.name.length){
+            throw new Error("Komponent existiert nicht");
+        }
+
+        let newString: string = "";
+        for(let i:number = 0; i<this.name.length; i++){
+            if(i == n){
+                newString += c;
+            }
+            newString+=this.name[i];
+        }
+
+        this.name = newString; //überschreiben
     }
 
-    public insert(i: number, c: string): void {
-        const components = this.name.split(this.delimiter);
-        if (i < 0 || i > components.length) {
-            throw new Error("Ungültige Insert-Position");
+    public insert(n: number, c: string): void {
+        const nameArray: string[] = this.name.split(this.delimiter);
+        let len:number = nameArray.length;
+        
+        for(let i:number = 0; i<len; i++){
+
         }
-        components.splice(i, 0, c);
-        this.name = components.join(this.delimiter);
+        throw new Error("needs implementation or deletion");
     }
 
     public append(c: string): void {
-        if (c.length === 0) {
-            throw new Error("String darf nicht leer sein");
-        }
-        const components = this.name.split(this.delimiter);
-        components.push(c);
-        this.name = components.join(this.delimiter);
+        throw new Error("needs implementation or deletion");
     }
 
-    public remove(i: number): void {
-        const components = this.name.split(this.delimiter);
-        if (i < 0 || i >= components.length) {
-            throw new Error("Komponente existiert nicht");
-        }
-        components.splice(i, 1);
-        this.name = components.join(this.delimiter);
+    public remove(n: number): void {
+        throw new Error("needs implementation or deletion");
     }
 
     public concat(other: Name): void {
-        const components = this.name.split(this.delimiter);
-        for (let j = 0; j < other.getNoComponents(); j++) {
-            components.push(other.getComponent(j));
-        }
-        this.name = components.join(this.delimiter);
+        throw new Error("needs implementation or deletion");
     }
+
 }
