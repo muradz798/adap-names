@@ -13,7 +13,9 @@ export class BuggyFile extends File {
      */
     protected doGetBaseName(): string {
         this.baseName = "";
+        this.assertIsValidBaseName(this.baseName);
         return super.doGetBaseName();
     }
 
 }
+

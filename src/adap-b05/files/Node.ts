@@ -57,7 +57,16 @@ export class Node {
      * @param bn basename of node being searched for
      */
     public findNodes(bn: string): Set<Node> {
-        throw new Error("needs implementation or deletion");
+        this.assertIsValidBaseName(bn);
+        const nodes = new Set<Node>;
+        if(this.getBaseName() === bn){
+            nodes.add(this);
+        }
+        return nodes;
+    }
+
+    protected assertIsValidBaseName(bn:string) : void{
+        IllegalArgumentException.assert(bn.length > 0, "basename darf nicht leer sein");
     }
 
 }
